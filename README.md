@@ -1,6 +1,6 @@
 # Linux network services project
 
-This repository presents a **team project** built in a virtual Linux network. I carried out much of the hands-on implementation and troubleshooting, with other team members contributing to the completed work. The environment used a Rocky Linux server and an Ubuntu client in VirtualBox.
+This repository presents a **team project** built in a virtual Linux network. I carried out much of the hands-on implementation and troubleshooting, with other team members contributing to the completed work. The environment used a Rocky Linux server and an Ubuntu client in VirtualBox. This repository is a selected screenshot record of that work; the original configuration and website source files are unavailable here, so it cannot be deployed from this repository.
 
 We set up and tested four connected services:
 
@@ -44,5 +44,5 @@ The zone checks completed successfully, a test message reached the second lab ma
 | Web setup | [HTTPS virtual host](screenshots/apache-portal-https-configuration.png) | An Apache TLS virtual host configuration view. |
 | Web test | [Redirect check](screenshots/http-to-https-redirect.png) | An HTTP request received a permanent redirect to HTTPS. |
 
-These screenshots document the work. The original server configuration and website source files were not available in the local project folder when this repository was prepared, so this is **not a deployable copy**. No submission document, student details, passwords, certificates, or private keys are included. The virtual machines were not rerun for this publication.
+These screenshots document selected steps and results. No submission document, student details, passwords, certificates, or private keys are included. The virtual machines were not rerun for this publication.
 
