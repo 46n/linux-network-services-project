@@ -1,48 +1,38 @@
 # Linux network services project
 
-This repository presents a **team project** built in a virtual Linux network. I carried out much of the hands-on implementation and troubleshooting, with other team members contributing to the completed work. The environment used a Rocky Linux server and an Ubuntu client in VirtualBox. This repository is a selected screenshot record of that work; the original configuration and website source files are unavailable here, so it cannot be deployed from this repository.
+**One virtual network, four connected services.** Our team configured and tested DNS, mail, web, and VPN services between a Rocky Linux server and an Ubuntu client in VirtualBox. I did much of the hands-on implementation and troubleshooting; other team members contributed to the completed work.
 
-We set up and tested four connected services:
+This repository is a **selected visual record** of the project. The original configuration and website source files are unavailable here, so the environment cannot be deployed from this repository.
 
-- **DNS:** BIND forward and reverse zones, checked with `named-checkzone` and client lookups.
-- **Mail:** Postfix and Dovecot, with DNS mail records and a two-way Thunderbird mail test.
-- **Web:** Apache virtual hosts with HTTPS and an HTTP-to-HTTPS redirect.
-- **VPN:** WireGuard between the server and client. The project record shows a handshake and successful pings in both directions; those images are omitted here because they display peer keys.
+## See the checks
+
+| DNS: zones accepted | Mail: message received | Web: HTTPS redirect |
+| :---: | :---: | :---: |
+| [<img src="screenshots/dns-zone-validation.png" alt="Terminal showing successful forward and reverse DNS zone validation" width="290">](screenshots/dns-zone-validation.png) | [<img src="screenshots/mail-received.png" alt="Mail client showing a received message in the second test mailbox" width="290">](screenshots/mail-received.png) | [<img src="screenshots/http-to-https-redirect.png" alt="Terminal showing a permanent HTTP to HTTPS redirect" width="290">](screenshots/http-to-https-redirect.png) |
+| Both BIND zone files passed `named-checkzone`. | A test message reached the second mailbox. | An HTTP request returned a permanent redirect to HTTPS. |
+
+Click a screenshot to inspect the full-size evidence. These are selected results from the project record; the virtual machines were not rerun for this publication.
+
+## How the services fit together
 
 ```mermaid
 flowchart LR
-    Client[Ubuntu client] -->|Lookups| DNS[BIND DNS]
-    Client -->|Mail| Mail[Postfix + Dovecot]
-    Client -->|HTTPS| Web[Apache virtual hosts]
+    Client[Ubuntu client] -->|DNS lookup| DNS[BIND DNS]
+    Client -->|Send and receive mail| Mail[Postfix + Dovecot]
+    Client -->|Browse over HTTPS| Web[Apache virtual hosts]
     Client <-->|VPN tunnel| VPN[WireGuard]
     DNS & Mail & Web & VPN --- Server[Rocky Linux server]
 ```
 
-*Logical view of the virtual network. The diagram is a guide to the services, not a deployable configuration.*
+This is a logical map, not a configuration that can be copied into a server. The project record also shows a WireGuard handshake and pings in both directions. Those images are omitted because they display peer keys.
 
-## Results at a glance
+## Explore the evidence
 
-The zone checks completed successfully, a test message reached the second lab mailbox, and the web server returned a permanent redirect to HTTPS. These are examples from the project record; the full system was not rerun for this publication.
-
-![Terminal output showing successful forward and reverse DNS zone checks](screenshots/dns-zone-validation.png)
-
-*BIND accepted both zone files.*
-
-![Terminal output showing an HTTP 301 redirect to HTTPS](screenshots/http-to-https-redirect.png)
-
-*The web server redirected an HTTP request to the HTTPS address.*
-
-## Selected screenshots
-
-| Area | Screenshot | What it shows |
+| Service | Setup shown | Result shown |
 | --- | --- | --- |
-| DNS setup | [Zone configuration](screenshots/dns-zone-configuration.png) | BIND zone declarations. |
-| DNS test | [Zone validation](screenshots/dns-zone-validation.png) | Forward and reverse zone checks completed successfully. |
-| Mail DNS | [Mail records](screenshots/mail-dns-records.png) | Client lookup of the mail host and MX record. |
-| Mail setup | [Postfix settings](screenshots/postfix-configuration-check.png) and [Dovecot settings](screenshots/dovecot-protocols.png) | Selected server configuration views. |
-| Mail test | [Received test message](screenshots/mail-received.png) | A message reached the second lab mailbox. |
-| Web setup | [HTTPS virtual host](screenshots/apache-portal-https-configuration.png) | An Apache TLS virtual host configuration view. |
-| Web test | [Redirect check](screenshots/http-to-https-redirect.png) | An HTTP request received a permanent redirect to HTTPS. |
+| **DNS** | [BIND zone declarations](screenshots/dns-zone-configuration.png) | [Forward and reverse zone checks](screenshots/dns-zone-validation.png) |
+| **Mail** | [MX lookup](screenshots/mail-dns-records.png), [Postfix](screenshots/postfix-configuration-check.png), [Dovecot](screenshots/dovecot-protocols.png) | [Message in the receiving mailbox](screenshots/mail-received.png) |
+| **Web** | [Apache HTTPS virtual host](screenshots/apache-portal-https-configuration.png) | [HTTP-to-HTTPS redirect](screenshots/http-to-https-redirect.png) |
+| **VPN** | WireGuard peer configuration, documented in the project record | Handshake and bidirectional pings, with key-bearing images withheld |
 
-These screenshots document selected steps and results. No submission document, student details, passwords, certificates, or private keys are included. The virtual machines were not rerun for this publication.
-
+**Publication scope:** The screenshots support the listed checks, but they are not a full deployment guide. No assignment document, student details, passwords, certificates, or private keys are included.
