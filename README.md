@@ -9,6 +9,29 @@ We set up and tested four connected services:
 - **Web:** Apache virtual hosts with HTTPS and an HTTP-to-HTTPS redirect.
 - **VPN:** WireGuard between the server and client. The project record shows a handshake and successful pings in both directions; those images are omitted here because they display peer keys.
 
+```mermaid
+flowchart LR
+    Client[Ubuntu client] -->|Lookups| DNS[BIND DNS]
+    Client -->|Mail| Mail[Postfix + Dovecot]
+    Client -->|HTTPS| Web[Apache virtual hosts]
+    Client <-->|VPN tunnel| VPN[WireGuard]
+    DNS & Mail & Web & VPN --- Server[Rocky Linux server]
+```
+
+*Logical view of the virtual network. The diagram is a guide to the services, not a deployable configuration.*
+
+## Results at a glance
+
+The zone checks completed successfully, a test message reached the second lab mailbox, and the web server returned a permanent redirect to HTTPS. These are examples from the project record; the full system was not rerun for this publication.
+
+![Terminal output showing successful forward and reverse DNS zone checks](screenshots/dns-zone-validation.png)
+
+*BIND accepted both zone files.*
+
+![Terminal output showing an HTTP 301 redirect to HTTPS](screenshots/http-to-https-redirect.png)
+
+*The web server redirected an HTTP request to the HTTPS address.*
+
 ## Selected screenshots
 
 | Area | Screenshot | What it shows |
