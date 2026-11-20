@@ -19,14 +19,6 @@ flowchart LR
 
 *Logical service map. It explains the relationships; it is not a deployable configuration or a record of a fresh test.*
 
-## How we decided whether a service worked
-
-Each service needed two kinds of evidence. A server-side check told us whether the configuration was usable. A client-side observation told us how much of the path actually worked. The figure pairs those observations in the order we used to interpret them.
-
-![Four service checks pairing server configuration with the client observation that verifies it](figures/walkthrough.png)
-
-For mail, a successful name lookup only gets the client to the right machine. A message arriving in a second mailbox exercises the transfer and retrieval path as well. For the website, a redirect records the server's instruction to request the secure URL. Certificate trust is a separate property that needs its own check. This distinction helped us narrow failures before changing a working service. [Python figure source](figures/plot_walkthrough.py)
-
 ## Three checks you can inspect
 
 | DNS: zones accepted | Mail: message received | Web: HTTPS redirect |
